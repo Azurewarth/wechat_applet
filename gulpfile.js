@@ -6,6 +6,7 @@ const rename    = require('gulp-rename')
 const less      = require('gulp-less')
 const sass      = require('gulp-sass')
 const plumber   = require('gulp-plumber')
+const imgMin    = require('gulp-imagemin')
 const webpack   = require('webpack')
 const webpackStream = require('webpack-stream')
 let isBuild = false
@@ -207,6 +208,7 @@ function compileCss(type, src, dist, file) {
 // 编译image文件
 function image() {
   gulp.src(srcDir.image)
+    .pipe(imgMin({progressive: true}))
     .pipe(gulp.dest(distDir))
     .on('end', () => {
       console.log(colorStyle['green'][0] + '> Image complite!' + colorStyle['green'][1])
