@@ -152,13 +152,13 @@ gulp.task('clean', () => {
   ])
 })
 
-// development下编译
+// development
 gulp.task('dev', () => {
   gulp.start(['npm', 'npm:watch', 'image', 'image:watch', 'json', 'json:watch', 'js', 'js:watch',
     'wxss', 'wxss:watch', 'less', 'less:watch', 'sass', 'sass:watch', 'views', 'views:watch'])
 })
 
-// product下编译
+// product
 gulp.task('build', () => {
   isBuild = true
   console.log('\n')
@@ -169,10 +169,7 @@ gulp.task('build', () => {
   })
 })
 
-/**
- * [pack common npm package]
- * 
- */
+// [pack common npm package]
 function npm() {
   return gulp.src(srcDir.npm)
     .pipe(webpackStream(webpackConfig), webpack)
@@ -182,9 +179,7 @@ function npm() {
     })
 }
 
-/**
- * [compileWxss compile less or sass or wxss file]
- */
+// [compileWxss compile less or sass or wxss file]
 function compileCss(type, src, dist, file) {
   let cssHandleFn = cssType[type]
   let compile = cssHandleFn ? gulp.src(src).pipe(plumber()).pipe(cssHandleFn()) : gulp.src(src).pipe(plumber());
@@ -205,7 +200,7 @@ function compileCss(type, src, dist, file) {
     })
 }
 
-// 编译image文件
+// [compile img files]
 function image() {
   gulp.src(srcDir.image)
     .pipe(imgMin({progressive: true}))
@@ -215,7 +210,7 @@ function image() {
     })
 }
 
-// 编译json
+// [compile json files]
 function json() {
   gulp.src(srcDir.json)
     .pipe(gulp.dest(distDir))
@@ -224,7 +219,7 @@ function json() {
     })
 }
 
-// 编译js
+// [compile js files]
 function js(file) {
   return gulp.src(srcDir.js)
     .pipe(gulp.dest(distDir))
@@ -238,7 +233,7 @@ function js(file) {
     })
 }
 
-// 编译html、wxml文件成wxml
+// [compile *ml files]
 function views(file) {
   return gulp.src(srcDir.views)
     .pipe(rename({ extname: '.wxml' }))
