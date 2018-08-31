@@ -45,7 +45,7 @@ Page({
       })
     }
     this.setData({
-      motto: this.data.motto + moment()
+      motto: this.data.motto
     })
   },
   getUserInfo: function(e) {
